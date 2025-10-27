@@ -1,8 +1,6 @@
-
 import { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { authService } from '../services/auth.service';
-
 
 const isPwComplex = (pw) => /[A-Za-z]/.test(pw || '') && /\d/.test(pw || '') && (pw || '').length >= 6;
 
@@ -41,6 +39,16 @@ export default function Login() {
     }
   };
 
+  const loginAsDemo = async () => {
+    try {
+      const data = await authService.login('demo@company.com', 'demo123');
+      localStorage.setItem('auth', JSON.stringify(data));
+      nav('/', { replace: true });
+    } catch {
+      setErr('Không thể đăng nhập tài khoản demo');
+    }
+  };
+
   return (
     <div className="row justify-content-center">
       <div className="col-lg-5 col-md-7">
@@ -68,6 +76,10 @@ export default function Login() {
                         : <>Đăng nhập</>}
             </button>
           </form>
+
+          <button type="button" className="btn btn-outline-secondary w-100 mt-2" onClick={loginAsDemo}>
+            Dùng tài khoản khách
+          </button>
 
           <div className="text-center mt-3">
             Chưa có tài khoản? <Link to="/register">Đăng ký</Link>

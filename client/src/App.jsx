@@ -19,7 +19,7 @@ export default function App() {
         <div className="ms-auto d-flex gap-2">
           {auth ? (
             <>
-              <span className="navbar-text">Xin chào, {auth.user?.name || auth.user?.email}</span>
+              <span className="navbar-text d-none d-sm-inline">Hi, {auth.user?.name || auth.user?.email}</span>
               <button className="btn btn-outline-danger btn-sm" onClick={logout}>Đăng xuất</button>
             </>
           ) : (

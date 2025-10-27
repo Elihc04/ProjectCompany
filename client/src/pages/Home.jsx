@@ -1,4 +1,3 @@
-
 export default function Home() {
   const auth = JSON.parse(localStorage.getItem('auth') || 'null');
   return (
@@ -9,7 +8,9 @@ export default function Home() {
           Đã đăng nhập dưới tên: <b>{auth.user?.name || auth.user?.email}</b>
         </div>
       ) : (
-        <div className="alert alert-info">Bạn chưa đăng nhập. Vui lòng chọn Đăng nhập/Đăng ký ở góc phải.</div>
+        <div className="alert alert-info">
+          Bạn chưa đăng nhập. Hãy chọn Đăng nhập/Đăng ký ở góc phải.
+        </div>
       )}
     </div>
   );

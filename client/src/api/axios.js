@@ -1,4 +1,3 @@
-// client/src/api/axios.js
 import axios from 'axios';
 
 const raw = (import.meta.env.VITE_API_URL || 'http://localhost:5050').trim().replace(/\/+$/, '');
