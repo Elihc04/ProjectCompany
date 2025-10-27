@@ -1,7 +1,7 @@
 👩‍💻 Người thực hiện
-Thành viên: Nguyễn Dương Lệ Chi
-Nhiệm vụ: Thiết kế giao diện đăng nhập & đăng ký
-Công nghệ: React, Bootstrap, HTML, CSS, JavaScript (Auth giả lập)
+- Thành viên: Nguyễn Dương Lệ Chi
+- Nhiệm vụ: Thiết kế giao diện đăng nhập & đăng ký
+- Công nghệ: React, Bootstrap, HTML, CSS, JavaScript (Auth giả lập)
 
 # Auth + OTP Mock — React + Bootstrap + Node/Express
 Giao diện đăng nhập/đăng ký kèm OTP gửi email (mô phỏng). Backend giả lập (in-memory) — không dùng DB/SMTP thật. OTP được “gửi” bằng cách in ra console của server.
@@ -63,9 +63,9 @@ npm install  # cài deps của Vite/React (nếu repo đã có package.json)
 # (tùy chọn) client/.env
 # VITE_API_URL=http://localhost:5050
 npm run dev
-# FE: http://localhost:5173
+#FE: http://localhost:5173
 
-🔐 Tài khoản mẫu
+## 🔐 Tài khoản mẫu
 Email: demo@company.com
 Mật khẩu: demo123
 Hoặc tự đăng ký email của bạn (mật khẩu phải có chữ + số, tối thiểu 6 ký tự).
