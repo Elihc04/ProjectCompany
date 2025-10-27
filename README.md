@@ -39,40 +39,36 @@ Giao diện đăng nhập/đăng ký kèm OTP gửi email (mô phỏng). Backend
 - Cổng trống: 5050 (server), 5173 (client)
 
 ## 🚀 Cách chạy
-1) Clone dự án
+### 1) Clone dự án
 ```bash
 git clone https://github.com/<user>/<repo>.git
 cd <repo>
-
-2) Backend (server)
-3) Frontend (client)
-
-2) Backend (server)
+### 2) Backend (server)
 Bash
 
 cd server
-npm install  # nếu chưa có package.json, cài tối thiểu: npm i express cors dotenv
+npm install
 
-# (tùy chọn) file .env
+# (tùy chọn) tạo .env
 # PORT=5050
 # ALLOWED_ORIGIN=http://localhost:5173
 
-node index.js
-# Server: http://localhost:5050
-# Kiểm tra: http://localhost:5050/api/ping -> {"ok":true}
+npm run start      # hoặc: npm run dev (nếu cài nodemon)
+# Server chạy tại: http://localhost:5050
+# Kiểm tra: http://localhost:5050/api/ping -> {"ok": true}
 3) Frontend (client)
 Mở terminal mới:
 
 Bash
 
 cd client
-npm install  # cài deps của Vite/React (nếu repo đã có package.json)
+npm install
 
-# (tùy chọn) client/.env
+# (tùy chọn) tạo client/.env
 # VITE_API_URL=http://localhost:5050
 
 npm run dev
-# FE: http://localhost:5173
+# Frontend chạy tại: http://localhost:5173
 🔐 Tài khoản mẫu
 Email: demo@company.com
 Mật khẩu: demo123
