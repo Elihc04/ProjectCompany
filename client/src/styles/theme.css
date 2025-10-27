@@ -1,0 +1,347 @@
+/* client/src/styles/theme.css */
+
+/* ===== Palette xanh nhạt ===== */
+:root{
+  --bg:#f3f7ff;
+  --card:#ffffff;
+  --ink:#0f172a;
+  --muted:#6b7280;
+  --line:#e6f0ff;
+  --p3:#60a5fa;  /* xanh chủ đạo */
+  --p2:#93c5fd;
+  --p6:#3b82f6;
+}
+
+/* Nền & chữ */
+html, body { background: var(--bg); color: var(--ink); }
+
+/* Thanh dưới tiêu đề */
+.section-underline { height:2px; background: linear-gradient(90deg, var(--p3), #a78bfa); }
+
+/* ===== Layout Chat kiểu ChatGPT ===== */
+.chat-shell { display:flex; gap:12px; }
+.chat-center-col { width:100%; max-width:880px; margin:0 auto; }
+
+.chat-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+/* Sidebar trái (desktop) */
+.chat-sidebar-left{
+  flex: 0 0 280px;
+  min-width: 280px;
+  background: linear-gradient(180deg, #ffffff, #f6f9ff);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  height: calc(100vh - 120px);
+  position: sticky; top: 12px;
+  overflow: hidden;
+}
+.chat-sidebar-left.collapsed{ flex:0 0 0; min-width:0; width:0; border:0; padding:0!important; pointer-events:none; }
+
+.chat-history{ overflow-y:auto; max-height: calc(100vh - 220px); padding-right:4px; }
+.history-item{ padding:10px; border-radius:10px; background:#fff; border:1px solid transparent; margin-bottom:8px; transition:.2s; }
+.history-item:hover{ border-color: var(--line); background:#f7faff; }
+.history-item.active{ border-color: var(--p3); box-shadow: 0 0 0 3px rgba(96,165,250,.15) inset; }
+
+/* Khung chat */
+.chat-window{
+  background: #fbfdff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+  height: 62vh;
+  overflow-y:auto;
+}
+
+/* Bong bóng + avatar */
+.message-row{ display:flex; gap:10px; margin-bottom:14px; align-items:flex-start; }
+.message-row.me{ flex-direction: row-reverse; }
+
+.avatar{
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(90deg, var(--p6), var(--p3)); color:#fff;
+}
+.avatar.bot{ background:#eaf2ff; color: var(--p6); border:1px solid var(--line); }
+
+.bubble-wrap{ position:relative; }
+.bubble{
+  max-width: 75%;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  background:#fff; border:1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(59,130,246,0.06);
+  white-space: pre-wrap;
+}
+.me .bubble{
+  color:#fff; border:none;
+  background: linear-gradient(90deg, var(--p6), var(--p3));
+}
+
+/* Nút copy trên bubble bot */
+.copy-btn{
+  position:absolute; top:6px; right:6px;
+  opacity:0; transition:.2s; border:1px solid var(--line);
+}
+.bubble-wrap:hover .copy-btn{ opacity:1; }
+
+/* Input kiểu pill + gợi ý */
+.input-dock{ position: sticky; bottom: 0; left:0; right:0; background: transparent; padding-top: 6px; }
+.input-pill{
+  display:flex; align-items:center; gap:8px;
+  border:1px solid var(--line); border-radius: 999px;
+  padding: 8px 10px; background:#fff;
+}
+.input-pill input{ border:none; outline:none; background:transparent; width:100%; }
+
+.suggest-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+.suggest-chip{
+  border:1px solid var(--line); color: var(--p6); background:#fff;
+  border-radius: 999px; padding: 6px 10px; cursor:pointer; transition:.2s;
+}
+.suggest-chip:hover{ background:#f0f6ff; }
+
+/* ===== Mobile: sidebar nổi góc trái ===== */
+
+@media (max-width: 992px){
+  :root { --nav-h: 64px; } /* chỉnh theo navbar của bạn */
+
+  .sidebar-edge-toggle{
+    display: inline-flex;
+    position: fixed;
+    left: 12px;
+    top: calc(var(--nav-h) + 12px);
+    z-index: 1100;
+    align-items: center; justify-content: center;
+    gap: 6px;
+    height: 36px; padding: 0 10px;
+    border-radius: 999px;
+    background: #fff;
+    color: #1e3a8a;
+    border: 1px solid #d1e0ff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  }
+
+  .chat-sidebar-left{
+    position: fixed;
+    left: 12px;
+    top: calc(var(--nav-h) + 12px);
+    z-index: 1090;
+    width: 86vw; max-width: 320px;
+    height: calc(100vh - var(--nav-h) - 24px);
+    border: 1px solid #e6f0ff;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.18);
+    background: linear-gradient(180deg, #ffffff, #f6f9ff);
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .chat-sidebar-left.open{
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .chat-sidebar-left.collapsed{
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .chat-shell{ flex-direction: column; }
+  .chat-center-col{ max-width: 100%; }
+  .chat-window{ height: 55vh; }
+}
+:root { --nav-h: 64px; } /* chỉnh theo chiều cao navbar của bạn */
+
+/* Desktop: thanh “rail” mỏng sát góc trái khi sidebar đóng */
+.sidebar-rail{
+  position: fixed;
+  left: 8px;
+  top: calc(var(--nav-h) + 12px);
+  z-index: 1050;
+  width: 44px;
+  height: calc(100vh - var(--nav-h) - 24px);
+  border: 1px solid #e6f0ff;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #f6f9ff);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-rail{
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  border: 1px solid #e6f0ff;
+  background: #fff;
+  color: #1e3a8a;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(59,130,246,.08);
+  transition: transform .12s ease, background .12s ease;
+}
+.btn-rail:hover{ background:#f0f6ff; transform: translateY(-1px); }
+
+.rail-sep{
+  width: 24px; height: 1px; background: #e6f0ff; margin: 2px 0 4px;
+}
+
+/* Mobile: nút nổi gọn góc trái, không che input */
+.sidebar-fab{
+  position: fixed;
+  left: 12px;
+  bottom: calc(88px + env(safe-area-inset-bottom)); /* nằm trên input dock */
+  z-index: 1100;
+  width: 46px; height: 46px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #60a5fa, #93c5fd);
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 26px rgba(59,130,246,.25);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.sidebar-fab:active{ transform: scale(.98); }
+
+/* Sidebar dạng overlay trên mobile (đã có, nhắc lại nếu thiếu) */
+@media (max-width: 992px){
+  .chat-sidebar-left{
+    position: fixed;
+    left: 12px;
+    top: calc(var(--nav-h) + 12px);
+    z-index: 1090;
+    width: 86vw; max-width: 320px;
+    height: calc(100vh - var(--nav-h) - 24px);
+    border: 1px solid #e6f0ff;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.18);
+    background: linear-gradient(180deg, #ffffff, #f6f9ff);
+    transform: translateX(-120%);
+    opacity: 0; pointer-events: none;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .chat-sidebar-left.open{
+    transform: translateX(0);
+    opacity: 1; pointer-events: auto;
+  }
+  .chat-sidebar-left.collapsed{
+    transform: translateX(-120%);
+    opacity: 0; pointer-events: none;
+  }
+}
+
+:root{ --nav-h:64px;
+ --rail-gap: 2px;  }
+:root{
+  --rail-gap: 4px;             /* khoảng giữa rail với sidebar */
+  --sidebar-chat-gap: 6px;     /* khoảng giữa sidebar với khung chat */
+}
+
+.chat-sidebar-left{
+  left: calc(2px + var(--rail-w) + var(--rail-gap));
+}
+/* RAIL luôn hiện (desktop) */
+.sidebar-rail{
+  position: fixed;
+  left: 8px;
+  top: calc(var(--nav-h) + 12px);
+  z-index: 1120;
+  width: 44px;
+  height: calc(100vh - var(--nav-h) - 24px);
+  border: 1px solid #e6f0ff;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #f6f9ff);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.btn-rail{
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  border: 1px solid #e6f0ff;
+  background: #fff;
+  color: #1e3a8a;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(59,130,246,.08);
+  transition: transform .12s ease, background .12s ease;
+}
+.btn-rail:hover{ background:#f0f6ff; transform: translateY(-1px); }
+.rail-sep{ width: 24px; height: 1px; background: #e6f0ff; margin: 2px 0 4px; }
+
+/* Sidebar overlay trên mobile */
+@media (max-width: 992px){
+  .chat-sidebar-left{
+     left: calc(8px + var(--rail-w) + var(--rail-gap));
+    position: fixed;
+    left: 12px;
+    top: calc(var(--nav-h) + 12px);
+    z-index: 1090;
+    width: 86vw; max-width: 320px;
+    height: calc(100vh - var(--nav-h) - 24px);
+    border: 1px solid #e6f0ff;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.18);
+    background: linear-gradient(180deg, #ffffff, #f6f9ff);
+    transform: translateX(-120%);
+    opacity: 0; pointer-events: none;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .chat-sidebar-left.open{ transform: translateX(0); opacity:1; pointer-events:auto; }
+  .chat-sidebar-left.collapsed{ transform: translateX(-120%); opacity:0; pointer-events:none; }
+}
+
+/* Ô tìm kiếm trong sidebar */
+.sidebar-search .form-control{
+  border-radius: 10px;
+  border: 1px solid #e6f0ff;
+}
+/* Chiều cao panel chung = viewport - navbar */
+/* Kích thước chung */
+/* Chiều cao panel chung = viewport - navbar */
+:root{
+  --nav-h: 64px;                  /* chỉnh theo navbar của bạn */
+  --panel-h: calc(100vh - var(--nav-h) - 24px);
+}
+
+/* Sidebar (desktop) dùng đúng --panel-h */
+.chat-sidebar-left{
+  height: var(--panel-h);
+}
+
+/* Rail mỏng cũng cao bằng panel */
+.sidebar-rail{
+  height: var(--panel-h);
+}
+
+/* Khung chat kéo giãn = panel, để đáy ngang với sidebar */
+.chat-card{
+  min-height: var(--panel-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Vùng tin nhắn chiếm khoảng trống; bỏ height cố định để khớp đáy */
+.chat-window{
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+/* Input ở đáy, có nền chuyển nhẹ để tách */
+.input-dock{
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent, #fff 40%);
+  padding-top: 6px;
+}
