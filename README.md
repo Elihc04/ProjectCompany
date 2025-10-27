@@ -40,6 +40,7 @@ Giao diện đăng nhập/đăng ký kèm OTP gửi email (mô phỏng). Backend
 
 ## 🚀 Cách chạy
 1) Clone dự án
+1) Clone dự án
 ```bash
 git clone https://github.com/<user>/<repo>.git
 cd <repo>
