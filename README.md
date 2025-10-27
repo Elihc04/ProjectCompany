@@ -46,26 +46,31 @@ cd <repo>
 
 2) Backend (server)
 Bash
+
 cd server
 npm install  # nếu chưa có package.json, cài tối thiểu: npm i express cors dotenv
+
 # (tùy chọn) file .env
 # PORT=5050
 # ALLOWED_ORIGIN=http://localhost:5173
+
 node index.js
 # Server: http://localhost:5050
 # Kiểm tra: http://localhost:5050/api/ping -> {"ok":true}
-
 3) Frontend (client)
 Mở terminal mới:
+
 Bash
+
 cd client
 npm install  # cài deps của Vite/React (nếu repo đã có package.json)
+
 # (tùy chọn) client/.env
 # VITE_API_URL=http://localhost:5050
-npm run dev
-#FE: http://localhost:5173
 
-## 🔐 Tài khoản mẫu
+npm run dev
+# FE: http://localhost:5173
+🔐 Tài khoản mẫu
 Email: demo@company.com
 Mật khẩu: demo123
 Hoặc tự đăng ký email của bạn (mật khẩu phải có chữ + số, tối thiểu 6 ký tự).
